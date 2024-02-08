@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_chat_app/view/screen/sign_in_screen/sign_in_screen.dart';
 import 'package:get/get.dart';
 
 import '../models/user_model.dart';
@@ -24,7 +25,7 @@ class HomeController extends GetxController {
       data.docs.forEach((DocumentSnapshot document) {
         if (firebaseAuth.currentUser!.email != document['email']) {
           userList
-              .add(UserModel(name: document['name'], email: document['email']));
+              .add(UserModel(name: document['name'], email: document['email'], id: document["uid"]));
         }
       });
 
@@ -33,5 +34,18 @@ class HomeController extends GetxController {
     } catch (e) {
       print("error");
     }
+  }
+
+
+  Future<void> firebaseSignOut() async {
+    final FirebaseFirestore firebaseFireStore = FirebaseFirestore.instance;
+
+    try {
+      firebaseAuth.signOut() ;
+      Get.offAll(SignInScreen()) ;
+    }catch (e) {
+      print(" ====================> error $e") ;
+    }
+
   }
 }

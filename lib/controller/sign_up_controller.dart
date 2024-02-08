@@ -30,6 +30,7 @@ class SignUpController extends GetxController {
         await firebaseFirestore.collection("users").doc(value.user!.uid).set({
           "name": nameController.text,
           "email": emailController.text,
+          "uid": value.user!.uid,
         });
 
         isLoading.value = false;
