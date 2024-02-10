@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_chat_app/core/app_route/app_route.dart';
 import 'package:get/get.dart';
 
 import '../view/screen/home/home_screen.dart';
@@ -27,7 +28,7 @@ class SignInController extends GetxController {
 
       isLoading.value = false ;
 
-      Get.offAll(HomeScreen()) ;
+      Get.offAllNamed(AppRoute.home) ;
 
     } catch (e) {
       isLoading.value = false ;

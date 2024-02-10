@@ -41,6 +41,7 @@ dependencies:
   firebase_auth: ^4.15.0
   cloud_firestore: ^4.13.3
   firebase_messaging: ^14.7.6
+  chat_bubbles: ^1.6.0
 
 dev_dependencies:
   flutter_test:

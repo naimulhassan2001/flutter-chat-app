@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_app/controller/home_controller.dart';
+import 'package:flutter_chat_app/core/app_route/app_route.dart';
 import 'package:flutter_chat_app/view/screen/sign_in_screen/sign_in_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
 
     Future.delayed(const Duration(seconds: 3), () {
-      Get.to(SignInScreen()) ;
+      Get.offAllNamed(AppRoute.signIn) ;
     }) ;
     super.initState();
   }

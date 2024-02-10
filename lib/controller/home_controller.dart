@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_chat_app/core/app_route/app_route.dart';
 import 'package:flutter_chat_app/view/screen/sign_in_screen/sign_in_screen.dart';
 import 'package:get/get.dart';
 
@@ -42,7 +43,7 @@ class HomeController extends GetxController {
 
     try {
       firebaseAuth.signOut() ;
-      Get.offAll(SignInScreen()) ;
+      Get.toNamed(AppRoute.signIn) ;
     }catch (e) {
       print(" ====================> error $e") ;
     }

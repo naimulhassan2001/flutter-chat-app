@@ -7,6 +7,7 @@ import 'package:flutter_chat_app/view/screen/splash_screen/splash_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'core/app_route/app_route.dart';
 import 'firebase_options.dart';
 import 'view/screen/sign_in_screen/sign_in_screen.dart';
 
@@ -32,10 +33,13 @@ class MyApp extends StatelessWidget {
         // Use builder only if you need to use library outside ScreenUtilInit context
         builder: (_, child) {
           return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            defaultTransition: Transition.noTransition,
             theme: lightTheme,
-            // home: SignInScreen(),
-            // home: SignUpScreen(),
-            home: SplashScreen(),
+            transitionDuration: const Duration(milliseconds: 200),
+            initialRoute: AppRoute.splash,
+            navigatorKey: Get.key,
+            getPages: AppRoute.routes,
           );
         });
   }

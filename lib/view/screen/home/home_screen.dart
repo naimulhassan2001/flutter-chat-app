@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/controller/chat_controller.dart';
 import 'package:flutter_chat_app/controller/home_controller.dart';
+import 'package:flutter_chat_app/core/app_route/app_route.dart';
 import 'package:flutter_chat_app/models/user_model.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +11,7 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   HomeController homeController = Get.put(HomeController());
+  ChatController chatController = Get.put(ChatController()) ;
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +32,12 @@ class HomeScreen extends StatelessWidget {
               title: Text(user.name),
               subtitle: Text(user.email),
               onTap: () {
-                Get.to(ChatScreen(
-                  receiverUserEmail: user.email,
-                  receiverUserID: user.id,
-                  receiverUserName: user.name,
-                ));
+                chatController.receiverUserEmail.value = user.email ;
+                chatController.receiverUserID.value =  user.id ;
+                chatController.receiverUserName.value = user.name ;
+
+                print("===============================>receiverUserName ${ chatController.receiverUserName.value}") ;
+                Get.toNamed(AppRoute.chat);
               },
               // Add more details or actions as needed
             );

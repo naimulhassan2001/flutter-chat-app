@@ -5,18 +5,24 @@ import 'package:flutter_chat_app/models/message.dart';
 import 'package:get/get.dart';
 
 class ChatController extends GetxController {
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  RxString receiverUserEmail = "".obs;
+  RxString receiverUserID = "".obs;
+  RxString receiverUserName = "".obs;
+
+  ScrollController scrollController = ScrollController();
+
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   TextEditingController messageController = TextEditingController();
 
-  Future<void> sendMessage(String receiverID) async {
+  Future<void> sendMessage() async {
     final currentUserID = firebaseAuth.currentUser!.uid;
     final currentUserEmail = firebaseAuth.currentUser!.email;
     final timestamp = Timestamp.now();
 
     try {
-      List<String> ids = [currentUserID, receiverID];
+      List<String> ids = [currentUserID, receiverUserID.value];
       ids.sort();
 
       String chatRoomID = ids.join("_");
@@ -28,19 +34,19 @@ class ChatController extends GetxController {
           .add({
         "senderId": currentUserID,
         "senderEmail": currentUserEmail!,
-        "receiverId": receiverID,
+        "receiverId": receiverUserID.value,
         "message": messageController.text,
         "Timestamp": timestamp
       });
 
-      messageController.clear() ;
+      messageController.clear();
     } catch (e) {
       print("====================> error $e");
     }
   }
 
-  Stream<QuerySnapshot> getMessage(userID, otherUserID) {
-    List<String> ids = [userID, otherUserID];
+  Stream<QuerySnapshot> getMessage() {
+    List<String> ids = [receiverUserID.value, firebaseAuth.currentUser!.uid];
     ids.sort();
 
     String chatRoomID = ids.join("_");
@@ -51,5 +57,41 @@ class ChatController extends GetxController {
         .collection("message")
         .orderBy("Timestamp", descending: false)
         .snapshots();
+  }
+
+  aaa() {
+    // print("===================>maxScrollExtent  ${scrollController.position.maxScrollExtent}") ;
+
+    Future.delayed(const Duration(seconds: 1), () {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 100),
+        // Adjust the duration as needed
+        curve: Curves.easeOut,
+      );
+    });
+  }
+
+  timeFormat(int seconds, int nanoseconds) {
+    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
+        seconds * 1000 + nanoseconds ~/ 1e6,
+        isUtc: true);
+
+    String formattedTime = "${dateTime.toLocal()}";
+
+    print(formattedTime);
+
+    var time = formattedTime.split(" ")[1].split(".")[0];
+
+    var hour = time.split(":")[0];
+    var minute = time.split(":")[1];
+
+    String period = int.parse(hour) >= 12 ? 'PM' : 'AM';
+    int formattedHours = int.parse(hour) % 12 == 0 ? 12 : int.parse(hour) % 12;
+
+    String formattedDuration =
+        "$formattedHours:${(hour).toString().padLeft(2, '0')} $period";
+
+    return formattedDuration;
   }
 }

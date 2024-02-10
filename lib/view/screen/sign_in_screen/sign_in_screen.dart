@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_app/core/app_route/app_route.dart';
 import 'package:flutter_chat_app/view/screen/sign_up_screen/sign_up_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -65,7 +66,7 @@ class SignInScreen extends StatelessWidget {
                             width: 4.w,
                           ),
                           GestureDetector(
-                              onTap: () => Get.to(SignUpScreen()),
+                              onTap: () => Get.toNamed(AppRoute.signUp),
                               child: CustomText(
                                 text: "Sign up".tr,
                                 fontSize: 14.sp,
