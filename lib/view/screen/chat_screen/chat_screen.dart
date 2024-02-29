@@ -29,6 +29,7 @@ class ChatScreen extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   return ListView.builder(
+                    reverse: true,
                     controller: chatController.scrollController,
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {
@@ -48,7 +49,7 @@ class ChatScreen extends StatelessWidget {
                       // var seconds = timestamp.seconds;
                       // var nanoseconds = timestamp.nanoseconds;
 
-                      chatController.aaa();
+                      // chatController.aaa();
 
 
 

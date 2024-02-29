@@ -17,6 +17,7 @@ class ChatController extends GetxController {
   TextEditingController messageController = TextEditingController();
 
   Future<void> sendMessage() async {
+
     final currentUserID = firebaseAuth.currentUser!.uid;
     final currentUserEmail = firebaseAuth.currentUser!.email;
     final timestamp = Timestamp.now();
@@ -46,6 +47,7 @@ class ChatController extends GetxController {
   }
 
   Stream<QuerySnapshot> getMessage() {
+
     List<String> ids = [receiverUserID.value, firebaseAuth.currentUser!.uid];
     ids.sort();
 
@@ -59,18 +61,6 @@ class ChatController extends GetxController {
         .snapshots();
   }
 
-  aaa() {
-    // print("===================>maxScrollExtent  ${scrollController.position.maxScrollExtent}") ;
-
-    Future.delayed(const Duration(seconds: 1), () {
-      scrollController.animateTo(
-        scrollController.position.maxScrollExtent,
-        duration: const Duration(milliseconds: 100),
-        // Adjust the duration as needed
-        curve: Curves.easeOut,
-      );
-    });
-  }
 
   timeFormat(int seconds, int nanoseconds) {
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
