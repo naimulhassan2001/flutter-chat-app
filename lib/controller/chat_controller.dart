@@ -57,7 +57,7 @@ class ChatController extends GetxController {
         .collection("chat_room")
         .doc(chatRoomID)
         .collection("message")
-        .orderBy("Timestamp", descending: false)
+        .orderBy("Timestamp", descending: true)
         .snapshots();
   }
 

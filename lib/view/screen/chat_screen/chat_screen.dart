@@ -62,7 +62,7 @@ class ChatScreen extends StatelessWidget {
                                   radius: 16,
                                   child: ClipOval(
                                       child: Image.network(
-                                    "https://www.jugantor.com/assets/news_photos/2023/02/15/image-645374-1676455527.jpg",
+                                    "http://alumni.cse.uiu.ac.bd/images/default2.jpg",
                                     height: 32,
                                     width: 32,
                                     fit: BoxFit.fill,

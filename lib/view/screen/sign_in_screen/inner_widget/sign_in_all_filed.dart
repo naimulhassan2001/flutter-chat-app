@@ -19,7 +19,7 @@ class LogInFiled extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         CustomText(
-          text: "Get started with Russend".tr,
+          text: "Get started with Firebase Chat App",
           fontSize: 20.sp,
           top: 28.h,
           fontWeight: FontWeight.w600,
@@ -33,7 +33,8 @@ class LogInFiled extends StatelessWidget {
             top: 27.h),
         TextFormField(
           controller: signInController.emailController,
-          decoration: const InputDecoration(labelText: "Email"),
+          textInputAction: TextInputAction.next,
+          decoration: const InputDecoration(hintText: "Email"),
         ),
         CustomText(
             text: "Password".tr,
@@ -44,7 +45,9 @@ class LogInFiled extends StatelessWidget {
             top: 22.h),
         TextFormField(
           controller: signInController.passwordController,
-          decoration: const InputDecoration(labelText: "Password"),
+          textInputAction: TextInputAction.next,
+          onFieldSubmitted: (value) => signInController.firebaseLogIn(),
+          decoration: const InputDecoration(hintText: "Password"),
         ),
         Align(
           alignment: Alignment.centerRight,
